@@ -21,7 +21,11 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
 
   },
   renderForm: function(data) {
-    this._data = data;
+    this.__proto__.__proto__._data = data;
+    var instance = this;
+    ecEditor.addEventListener("org.ekstep.questionunit:compiled",function(){
+      ecEditor.dispatchEvent(instance.manifest.id + ":editquestion",data);
+    });
   },
   validateForm: function(callback) {
     var instance = this;
