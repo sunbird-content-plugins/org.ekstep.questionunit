@@ -138,6 +138,47 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    */
   getQuestionState: function() {
     return this._question.state;
+  },
+  /**
+   * provide media url to asset, runs inside the context of [mtf, fib, mcq context]
+   * @memberof org.ekstep.questionunit
+   * @param {String} url from question set.
+   * @returns {String} url.
+   */
+  getAssetUrl:function(url){
+    if(isbrowserpreview){// eslint-disable-line no-undef
+      return url;
+    }
+    else{
+      return 'file:///' + EkstepRendererAPI.getBaseURL()+ url;
+    }
+  },
+  /**
+   * play audio once at a time, runs inside the context of [mtf, fib, mcq context]
+   * @memberof org.ekstep.questionunit
+   * @param {String} audio from question set.
+   */
+  playAudio: function(audio){
+    audio = this.getAssetUrl(audio);
+    if (this._lastAudio && (this._lastAudio != audio)) { // eslint-disable-line no-undef
+      this._currentAudio.pause(); // eslint-disable-line no-undef
+    }
+    if (!this._currentAudio || this._currentAudio.paused) { // eslint-disable-line no-undef
+      this._currentAudio = new Audio(audio); // eslint-disable-line no-undef
+      this._currentAudio.play(); // eslint-disable-line no-undef
+      this._lastAudio = audio; // eslint-disable-line no-undef
+    } else {
+      this._currentAudio.pause(); // eslint-disable-line no-undef
+      this._currentAudio.currentTime = 0 // eslint-disable-line no-undef
+    }
+  },
+  /**
+   * provide media url to audio image, runs inside the context of [mtf, fib, mcq context]
+   * @memberof org.ekstep.questionunit
+   * @returns {String} url.
+   */
+  getAudioIcon:function(){
+    return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, "renderer/assets/audio.png"));
   }
 });
 //# sourceURL=questionUnitRenderer.js
