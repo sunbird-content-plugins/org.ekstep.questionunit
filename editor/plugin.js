@@ -38,7 +38,7 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
    * @param {object} data - question data
    */
   renderForm: function(data) {
-    this.__proto__.__proto__._data = data;
+    this._data = data;
     var instance = this;
     ecEditor.addEventListener("org.ekstep.questionunit:compiled",function(){
       ecEditor.dispatchEvent(instance.manifest.id + ":editquestion",data);
@@ -52,7 +52,7 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
   validateForm: function(callback) {
     var instance = this;
     ecEditor.dispatchEvent(this.manifest.id + ":validateform", function(isValid, data) {
-      instance.__proto__.__proto__._data = data;
+      instance._data = data;
       if(_.isFunction(callback)) {
         callback(isValid);
       }
