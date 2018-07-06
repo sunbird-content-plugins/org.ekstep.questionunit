@@ -1,8 +1,6 @@
 describe("EditorPlugin", function() {
   var plugin, data, compiled;
-
   beforeEach(module('org.ekstep.questionunit'));
-
   beforeEach(function() {
     plugin = new org.ekstep.contenteditor.questionUnitPlugin({}, {}, {});
     data = {
@@ -15,11 +13,9 @@ describe("EditorPlugin", function() {
         "question": {
           "text": "a"
         },
-        "answer": [
-        {
+        "answer": [{
           "text": "a"
-        }
-        ]
+        }]
       },
       "config": {
         "metadata": {
@@ -27,12 +23,8 @@ describe("EditorPlugin", function() {
           "title": "xcvxvx",
           "language": "English",
           "qlevel": "Easy",
-          "gradeLevel": [
-          "Kindergarten"
-          ],
-          "concepts": [
-          "do_112300246933831680110"
-          ],
+          "gradeLevel": ["Kindergarten"],
+          "concepts": ["do_112300246933831680110"],
           "description": "cvcbcbc",
           "max_score": 1
         },
@@ -41,7 +33,6 @@ describe("EditorPlugin", function() {
         "partial_scoring": false
       }
     }
-
     spyOn(plugin, "initialize").and.callThrough();
     spyOn(plugin, "beforeInit").and.callThrough();
     spyOn(plugin, "afterInit").and.callThrough();
@@ -49,10 +40,10 @@ describe("EditorPlugin", function() {
     spyOn(plugin, "validateForm").and.callThrough();
     spyOn(ecEditor, "dispatchEvent").and.callThrough();
     spyOn(ecEditor, "addEventListener").and.callThrough();
-     compiled = jasmine.createSpy('org.ekstep.questionunit.mcq:compiled');
-      window.addEventListener('org.ekstep.questionunit.mcq:compiled', function (e) {
-        compiled();
-      });
+    compiled = jasmine.createSpy('org.ekstep.questionunit.mcq:compiled');
+    window.addEventListener('org.ekstep.questionunit.mcq:compiled', function() {
+      compiled();
+    });
   });
   describe("Plugin initialize", function() {
     it("should call beforeInit and afterInit", function() {
@@ -64,16 +55,14 @@ describe("EditorPlugin", function() {
   describe("Render form for edit question", function() {
     it("should render form function to load question form", function() {
       plugin.renderForm(data);
-      ecEditor.dispatchEvent("org.ekstep.questionunit.mcq:editquestion",data);
+      ecEditor.dispatchEvent("org.ekstep.questionunit.mcq:editquestion", data);
     });
   });
   describe("Validate question unit form ", function() {
     it("should call validate function", function() {
       plugin.validateForm();
-      ecEditor.dispatchEvent("org.ekstep.questionunit:validateform",data);
+      ecEditor.dispatchEvent("org.ekstep.questionunit:validateform", data);
     });
   });
- 
-}); 
-
+});
 //# sourceURL=questionUnitPlugin.js
