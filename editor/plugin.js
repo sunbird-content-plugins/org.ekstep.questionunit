@@ -40,7 +40,7 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
   renderForm: function(data) {
     this.__proto__.__proto__._data = data;
     var instance = this;
-    ecEditor.addEventListener("org.ekstep.questionunit:compiled",function(){
+    ecEditor.addEventListener("org.ekstep.questionunit:ready",function(){
       ecEditor.dispatchEvent(instance.manifest.id + ":editquestion",data);
     });
   },
