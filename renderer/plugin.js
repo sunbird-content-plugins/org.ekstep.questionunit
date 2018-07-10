@@ -154,31 +154,50 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     }
   },
   /**
-   * play audio once at a time, runs inside the context of [mtf, fib, mcq context]
+   * play audio based on the assetObj Options
    * @memberof org.ekstep.questionunit
-   * @param {String} audio from question set.
+   * @param {{src:String, loop: Boolean}} assetObj from question set.
+   * @example playAudio(src: "/assets/public/content/rani1_1466755651199.mp3", loop: true)
    */
-  playAudio: function(audio){
-    audio = this.getAssetUrl(audio);
-    if (this._lastAudio && (this._lastAudio != audio)) { // eslint-disable-line no-undef
-      this._currentAudio.pause(); // eslint-disable-line no-undef
-    }
-    if (!this._currentAudio || this._currentAudio.paused) { // eslint-disable-line no-undef
-      this._currentAudio = new Audio(audio); // eslint-disable-line no-undef
-      this._currentAudio.play(); // eslint-disable-line no-undef
-      this._lastAudio = audio; // eslint-disable-line no-undef
-    } else {
-      this._currentAudio.pause(); // eslint-disable-line no-undef
-      this._currentAudio.currentTime = 0 // eslint-disable-line no-undef
-    }
+  playAudio: function(assetObj){
+    if(assetObj.loop) 
+      HTMLAudioPlayer.loop(this.getAssetUrl(assetObj.src));
+    else
+      HTMLAudioPlayer.play(this.getAssetUrl(assetObj.src));
   },
   /**
-   * provide media url to audio image, runs inside the context of [mtf, fib, mcq context]
+   * pauses audio
    * @memberof org.ekstep.questionunit
-   * @returns {String} url.
+   * @param {{src:String}} assetObj
+   * @example pauseAudio(src: "/assets/public/content/rani1_1466755651199.mp3")
    */
-  getAudioIcon:function(){
-    return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, "renderer/assets/audio.png"));
+  pauseAudio: function(assetObj) {
+    HTMLAudioPlayer.pause(this.getAssetUrl(assetObj.src));
+  },
+  /**
+   * stops audio
+   * @memberof org.ekstep.questionunit
+   * @param {{src:String}} assetObj
+   * @example stopAudio(src: "/assets/public/content/rani1_1466755651199.mp3")
+   */
+  stopAudio: function(assetObj) {
+    HTMLAudioPlayer.stop(this.getAssetUrl(assetObj.src));
+  },
+  /**
+   * switch between play and pause
+   * @memberof org.ekstep.questionunit
+   * @param {{src:String}} assetObj
+   * @example toggleAudio(src: "/assets/public/content/rani1_1466755651199.mp3")
+   */
+  toggleAudio: function(assetObj) {
+    HTMLAudioPlayer.togglePlay(this.getAssetUrl(assetObj.src));
+  },
+  /**
+   * //returns audio icon url
+   * getAudioIcon('renderer/assets/icon.png')
+   */
+  getAudioIcon:function(path){
+    return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
   }
 });
 //# sourceURL=questionUnitRenderer.js
