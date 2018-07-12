@@ -36,6 +36,9 @@ CKEDITOR.editorConfig = function(config) {
   // Simplify the dialog windows.
   config.removeDialogTabs = 'image:advanced;link:advanced';
 
+  // Only Microsoft Word content formatting will be preserved.
+  config.forcePasteAsPlainText = 'allow-word',
+
   config.wordcount = {
 
     // Whether or not you want to show the Paragraphs Count
