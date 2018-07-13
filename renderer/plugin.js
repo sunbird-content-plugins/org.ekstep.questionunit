@@ -138,6 +138,66 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    */
   getQuestionState: function() {
     return this._question.state;
+  },
+  /**
+   * provide media url to asset, runs inside the context of [mtf, fib, mcq context]
+   * @memberof org.ekstep.questionunit
+   * @param {String} url from question set.
+   * @returns {String} url.
+   */
+  getAssetUrl:function(url){
+    if(isbrowserpreview){// eslint-disable-line no-undef
+      return url;
+    }
+    else{
+      return 'file:///' + EkstepRendererAPI.getBaseURL()+ url;
+    }
+  },
+  /**
+   * play audio based on the assetObj Options
+   * @memberof org.ekstep.questionunit
+   * @param {{src:String, loop: Boolean}} assetObj from question set.
+   * @example playAudio(src: "/assets/public/content/rani1_1466755651199.mp3", loop: true)
+   */
+  playAudio: function(assetObj){
+    if(assetObj.loop) 
+      HTMLAudioPlayer.loop(this.getAssetUrl(assetObj.src));
+    else
+      HTMLAudioPlayer.play(this.getAssetUrl(assetObj.src));
+  },
+  /**
+   * pauses audio
+   * @memberof org.ekstep.questionunit
+   * @param {{src:String}} assetObj
+   * @example pauseAudio(src: "/assets/public/content/rani1_1466755651199.mp3")
+   */
+  pauseAudio: function(assetObj) {
+    HTMLAudioPlayer.pause(this.getAssetUrl(assetObj.src));
+  },
+  /**
+   * stops audio
+   * @memberof org.ekstep.questionunit
+   * @param {{src:String}} assetObj
+   * @example stopAudio(src: "/assets/public/content/rani1_1466755651199.mp3")
+   */
+  stopAudio: function(assetObj) {
+    HTMLAudioPlayer.stop(this.getAssetUrl(assetObj.src));
+  },
+  /**
+   * switch between play and pause
+   * @memberof org.ekstep.questionunit
+   * @param {{src:String}} assetObj
+   * @example toggleAudio(src: "/assets/public/content/rani1_1466755651199.mp3")
+   */
+  toggleAudio: function(assetObj) {
+    HTMLAudioPlayer.togglePlay(this.getAssetUrl(assetObj.src));
+  },
+  /**
+   * //returns audio icon url
+   * getAudioIcon('renderer/assets/icon.png')
+   */
+  getAudioIcon:function(path){
+    return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
   }
 });
 //# sourceURL=questionUnitRenderer.js
