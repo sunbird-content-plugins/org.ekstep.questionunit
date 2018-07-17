@@ -31,6 +31,13 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     $(questionsetInstance._constants.qsElement).html(template({question: this._question}));
 
     this.postQuestionShow(event);
+
+    setTimeout(function () {
+      jQuery('.math-text').each(function (index, element) {
+        var mathText = element.getAttribute('data-math');
+        katex.render(mathText, jQuery(element)[0], { displayMode: true });
+      });
+    }, 600);
   },
   /**
    * Set the question properties - data, config and state.

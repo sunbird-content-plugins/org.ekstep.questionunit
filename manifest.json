@@ -10,8 +10,14 @@
         "main": "editor/plugin.js",
         "dependencies": [
             {
-                "type": "js",
-                "src": "editor/libs/ck-editor/ckeditor.js"
+                "type": "plugin",
+                "plugin": "org.ekstep.mathtext",
+                "ver": "1.0"
+            },
+            {
+                "type": "plugin",
+                "plugin": "org.ekstep.libs.ckeditor",
+                "ver": "1.0"
             }
         ],
         "help": {
@@ -20,6 +26,16 @@
         }
     },
     "renderer": {
-        "main": "renderer/plugin.js"
+        "main": "renderer/plugin.js",
+        "dependencies": [
+            {
+                "type": "js",
+                "src": "renderer/libs/katex/katex.min.js"
+            },
+            {
+                "type": "css",
+                "src": "renderer/libs/katex/katex.min.css"
+            }
+        ]
     }
 }
