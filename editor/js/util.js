@@ -40,7 +40,7 @@ angular.module('org.ekstep.question').directive('selectedMediaContainer', functi
             mediaIndex: '@mediaIndex'
         },
         template: '<div ng-if="(formdata.image.length > 0) || (formdata.audio.length > 0)">\
-      <div class="selected-media-container">\
+      <div class="question-selected-media-container">\
         <div class="selected-image-container" ng-if="formdata.image.length > 0">\
             <div class="image-container">\
                 <img ng-click="callbacks.addMedia(qEleType, mediaIndex, \'image\');" src="{{formdata.image}}" class="selected-image" />\
