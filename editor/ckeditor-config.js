@@ -13,6 +13,10 @@ CKEDITOR.editorConfig = function (config) {
   config.allowedContent = true;
   config.language = 'en';
 
+  // All content will be pasted as plain text.
+  config.forcePasteAsPlainText = true;
+
+
   config.toolbarGroups = [
     //{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
     // { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
