@@ -4,7 +4,7 @@
  */
 CKEDITOR.editorConfig = function (config) {
 
-  config.extraPlugins = 'wordcount,notification,font,justify,colorbutton,mathtext';
+  config.extraPlugins = 'notification,font,justify,colorbutton,mathtext,wordcount,pastefromword';
 
   //Mathtext related config
   config.katexCSS = CKEDITOR.basePath + 'plugins/mathtext/libs/katex/katex.min.css';
@@ -15,7 +15,7 @@ CKEDITOR.editorConfig = function (config) {
 
   // All content will be pasted as plain text.
   config.forcePasteAsPlainText = true;
-
+  config.pasteFilter = 'plain-text';
 
   config.toolbarGroups = [
     //{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
@@ -28,13 +28,13 @@ CKEDITOR.editorConfig = function (config) {
     // { name: 'others' },
     '/',
     {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},
-    {name: 'paragraph', groups: ['list', 'align']},
+    // {name: 'paragraph', groups: ['list', 'align']},
     {name: 'styles'},
     {name: 'colors'},
     {name: 'input'}
   ];
   // Font pixel to wm conversion done based on taking 14px = 1em;
-  config.fontSize_sizes = '18/1.285714285em;20/1.428571428em;22/1.571428571em;24/1.714285714em;26/1.857142857em;28/2em;32/2.285714285em;36/2.571428571em;40/2.857142857em;44/3.142857142em;48/3.428571428em;54/3.857142857em;60/4.285714285em;66/4.714285714em;72/5.142857142em;80/5.714285714em;88/6.285714285em;96/6.857142857em;';
+  config.fontSize_sizes = '18/1.285714285em;20/1.428571428em;22/1.571428571em;24/1.714285714em;26/1.857142857em;28/2em;';
 
   // config.fontSize_defaultLabel = '18';
 
@@ -42,10 +42,10 @@ CKEDITOR.editorConfig = function (config) {
 
   // Remove some buttons provided by the standard plugins, which are
   // not needed in the Standard(s) toolbar.
-  config.removeButtons = 'Underline,Subscript,Superscript,Font,Format';
+  config.removeButtons = 'Subscript,Superscript,Font,Format';
 
   // Set the most common block elemnts.
-  config.format_tags = 'p;h1;h2;h3';
+  // config.format_tags = 'p;h1;h2;h3';
 
   // Simplify the dialog windows.
   config.removeDialogTabs = 'image:advanced;link:advanced';
@@ -71,7 +71,7 @@ CKEDITOR.editorConfig = function (config) {
     maxWordCount: -1,
 
     // Maximum allowed Char Count, -1 is default for unlimited
-    maxCharCount: 220,
+    maxCharCount: 1000,
 
     // Add filter to add or remove element before counting (see CKEDITOR.htmlParser.filter), Default value : null (no filter)
     filter: new CKEDITOR.htmlParser.filter({
