@@ -6,9 +6,12 @@ CKEDITOR.editorConfig = function (config) {
 
   config.extraPlugins = 'notification,font,justify,colorbutton,mathtext,wordcount,pastefromword';
 
-  //Mathtext related config
+  // Mathtext related config
   config.katexCSS = CKEDITOR.basePath + 'plugins/mathtext/libs/katex/katex.min.css';
   config.katexJS = CKEDITOR.basePath + 'plugins/mathtext/libs/katex/katex.min.js';
+
+  // Set the filter file (this is the default)
+  config.pasteFromWordCleanupFile = CKEDITOR.basePath + 'plugins/pastefromword/filter/default.js';
 
   config.allowedContent = true;
   config.language = 'en';
