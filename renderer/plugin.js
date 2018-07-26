@@ -18,6 +18,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     EkstepRendererAPI.addEventListener(this._manifest.id + ":show", this.showQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":hide", this.hideQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":evaluate", this.evaluateQuestion, this);
+    EkstepRendererAPI.addEventListener(this._manifest.id + ":rendermath", this.renderMath, this);
   },
   /**
    * Listener for ':show' event.
@@ -31,6 +32,8 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     $(questionsetInstance._constants.qsElement).html(template({question: this._question}));
 
     this.postQuestionShow(event);
+
+    this.renderMath(event);
   },
   /**
    * Set the question properties - data, config and state.
@@ -198,6 +201,14 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    */
   getAudioIcon:function(path){
     return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
+  },
+  renderMath: function (event) {
+    setTimeout(function () {
+      jQuery('.math-text').each(function (index, element) {
+        var mathText = element.getAttribute('data-math');
+        katex.render(mathText, jQuery(element)[0], { displayMode: true });
+      });
+    }, 600);
   }
 });
 //# sourceURL=questionUnitRenderer.js

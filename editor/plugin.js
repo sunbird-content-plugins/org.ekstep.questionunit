@@ -13,9 +13,7 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
    */
   initialize: function () {
     this.beforeInit();
-    if(this.manifest.id == 'org.ekstep.questionunit') {
-      CKEDITOR.basePath = ecEditor.resolvePluginResource(this.manifest.id, this.manifest.ver, "editor/libs/ck-editor/"); // eslint-disable-line no-unused-vars
-    }
+    
     this.afterInit();
   },
   /**
