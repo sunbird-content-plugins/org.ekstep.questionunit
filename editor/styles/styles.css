@@ -22,7 +22,9 @@
   }
   
   .selected-image {
+    cursor:pointer;
     max-width: 100%;
+    height:100%;
   }
   
   .selected-audio-container {
@@ -42,6 +44,7 @@
   }
   
   .audio-container {
+    cursor:pointer;
     height: 100%;
     float: left;
     overflow: hidden;
