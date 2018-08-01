@@ -36,7 +36,7 @@ angular.module('org.ekstep.question').directive('selectedMediaContainer', functi
         scope: {
             formdata: '=',
             callbacks: '=mediaCallbacks',
-            qEleType: '@qEleType',
+            qEleType: '@mediaType',
             mediaIndex: '@mediaIndex'
         },
         template: '<div ng-if="(formdata.image.length > 0) || (formdata.audio.length > 0)">\
@@ -46,8 +46,8 @@ angular.module('org.ekstep.question').directive('selectedMediaContainer', functi
                 <img ng-click="callbacks.addMedia(qEleType, mediaIndex, \'image\');" src="{{formdata.image}}" class="selected-image" />\
             </div>\
             <div class="delete-media-container">\
-                <a href="" class="deleteMedia" data-tooltip="Delete image" data-inverted="">\
-                    <i class="trash alternate outline large icon delete-icon" ng-click="callbacks.deleteMedia(qEleType, mediaIndex, \'image\');"></i>\
+                <a href="" ng-click="callbacks.deleteMedia(qEleType, mediaIndex, \'image\');" class="deleteMedia" data-tooltip="Delete image" data-inverted="">\
+                    <i class="trash alternate outline large icon delete-icon" ></i>\
                 </a>\
             </div>\
         </div>\
