@@ -19,6 +19,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     EkstepRendererAPI.addEventListener(this._manifest.id + ":hide", this.hideQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":evaluate", this.evaluateQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":rendermath", this.renderMath, this);
+    this.loadComponents();
   },
   /**
    * Listener for ':show' event.
@@ -209,6 +210,9 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
         katex.render(mathText, jQuery(element)[0], { displayMode: true });
       });
     }, 600);
+  },
+  loadComponents: function(){
+    jQuery.extend(this, org.ekstep.contentrenderer.questionUnitPluginComponentObj);
   }
 });
 //# sourceURL=questionUnitRenderer.js

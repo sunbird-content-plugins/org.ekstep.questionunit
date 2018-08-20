@@ -1,0 +1,156 @@
+.question-content-container .question-container .image-container img.audio, .question-content-container .question-container .image-container img.q-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+.question-content-container .question-container .expand-button img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.question-content-container .question-container {
+    padding: 1.875% 0%;
+    height: 17.8333333333%;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.question-content-container .question-container .image-container {
+    width: 14%;
+    float: left;
+    top: 0;
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    margin-left: 9%;
+}
+
+.question-content-container .question-container .image-container img.q-image {
+    max-width: 100%;
+    max-height: 100%;
+    float: left;
+    right: 0;
+    cursor: pointer;
+}
+
+.question-content-container .question-container .image-container img.audio {
+    width: 30%;
+    float: left;
+    right: -13%;
+    cursor: pointer;
+}
+
+.question-content-container .question-container .image-container img.audio.no-q-image {
+    width: 50%;
+    float: left;
+    right: 18%;
+}
+
+.question-content-container .question-container .hiding-container {
+    height: 50%;
+    padding: 0% 14.0625%;
+    overflow: hidden;
+    background: white;
+    position: absolute;
+    z-index: 1;
+}
+
+.question-content-container .question-container .hiding-container .expand-container {
+    max-height: 70vh;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.question-content-container .question-container .hiding-container .expand-container::-webkit-scrollbar {
+    width: 0px;
+    /* remove scrollbar space */
+    background: transparent;
+    /* optional: just make scrollbar invisible */
+}
+
+/* optional: show position indicator in red */
+
+.question-content-container .question-container .hiding-container .expand-container::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+.question-content-container .question-container .hiding-container .expand-container.with-media {
+    padding-left: 18%;
+}
+
+.question-content-container .question-container .hiding-container .expand-container p {
+    margin-top: 0;
+}
+
+.question-content-container .question-container .expand-button {
+    position: absolute;
+    background-color: #E3E3E3;
+    width: 9%;
+    border-radius: 9px;
+    height: 21.8%;
+    bottom: 5%;
+    right: 9%;
+    z-index: 2;
+    cursor: pointer;
+    display: none;
+}
+
+.question-content-container .question-container .expand-button img {
+    height: 70%;
+}
+
+
+/* From here image model popup style */
+.qc-popup-close-button {
+    cursor: pointer;
+    position: absolute;
+    right: -35px;
+    color: white;
+    bottom: 87%;
+  }
+  
+  #image-model-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+  
+  #image-model-popup .popup-overlay {
+    opacity: 0.8;
+  }
+  
+  #image-model-popup .popup-full-body {
+    width: auto;
+    margin: auto;
+  }
+  
+  #image-model-popup .assess-popup {
+    position: relative;
+    width: fit-content;
+    top: 0;
+    left: 0;
+    margin: auto;
+  }
+  
+  #image-model-popup img.qc-question-fullimage {
+    max-width: 60vw;
+    max-height: 100%;
+  }
+  
+  #image-model-popup .qc-popup-close-button {
+    position: absolute;
+    right: -15px;
+    top: -20px;
+    color: white;
+    font-size: 20px;
+  }
