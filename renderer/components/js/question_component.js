@@ -1,11 +1,12 @@
-org.ekstep.contentrenderer.questionUnitPluginComponentObj = {
+org.ekstep.contentrenderer.questionunitComponents = org.ekstep.contentrenderer.questionunitComponents || {};
+org.ekstep.contentrenderer.questionunitComponents.questionComponent = {
     generateQuestionComponent: function () {
         return '\
         <div class="question-container">\
         <% if(question.data.question.image || question.data.question.audio){ %> \
             <div class="image-container">\
             <% if(question.data.question.image){ %> \
-                <img onclick="QuestionUnitRendererController.pluginInstance.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
+                <img onclick="org.ekstep.contentrenderer.questionunitComponents.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
                 <img onclick=QuestionUnitRendererController.pluginInstance.playAudio({src:"<%= question.data.question.audio %>"}) class="audio" src="<%= QuestionUnitRendererController.pluginInstance.getAudioIcon("renderer/assets/audio-icon.png") %>" />\
             <% }else { %>\
               <img onclick=QuestionUnitRendererController.pluginInstance.playAudio({src:"<%= question.data.question.audio %>"}) class="audio no-q-image" src="<%= QuestionUnitRendererController.pluginInstance.getAudioIcon("renderer/assets/audio-icon.png") %>" />\
@@ -17,7 +18,7 @@ org.ekstep.contentrenderer.questionUnitPluginComponentObj = {
                 <%= question.data.question.text %>\
                 </div>\
             </div>\
-            <div class="expand-button" onclick="QuestionUnitRendererController.pluginInstance.toggleQuestionText()">\
+            <div class="expand-button" onclick="org.ekstep.contentrenderer.questionunitComponents.questionComponent.toggleQuestionText()">\
                 <img src="<%= QuestionUnitRendererController.pluginInstance.getAudioIcon("renderer/assets/down_arrow.png") %>" />\
             </div>\
         </div>\
@@ -53,11 +54,11 @@ org.ekstep.contentrenderer.questionUnitPluginComponentObj = {
         this.isQuestionTextOverflow();
     },
     generateModelTemplate: function(){
-        return "<div class='popup' id='image-model-popup' onclick='QuestionUnitRendererController.pluginInstance.hideImageModel()'><div class='popup-overlay' onclick='QuestionUnitRendererController.pluginInstance.hideImageModel()'></div> \
+        return "<div class='popup' id='image-model-popup' onclick='org.ekstep.contentrenderer.questionunitComponents.questionComponent.hideImageModel()'><div class='popup-overlay' onclick='org.ekstep.contentrenderer.questionunitComponents.questionComponent.hideImageModel()'></div> \
         <div class='popup-full-body'> \
             <div class='font-lato assess-popup assess-goodjob-popup'> \
                 <img class='qc-question-fullimage' src=<%= src %> /> \
-                <div onclick='QuestionUnitRendererController.pluginInstance.hideImageModel()' class='qc-popup-close-button'>&times;</div> \
+                <div onclick='org.ekstep.contentrenderer.questionunitComponents.questionComponent.hideImageModel()' class='qc-popup-close-button'>&times;</div> \
             </div>\
         </div>"
     },
