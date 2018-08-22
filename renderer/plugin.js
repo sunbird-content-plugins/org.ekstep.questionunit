@@ -19,6 +19,8 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     EkstepRendererAPI.addEventListener(this._manifest.id + ":hide", this.hideQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":evaluate", this.evaluateQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":rendermath", this.renderMath, this);
+    EkstepRendererAPI.addEventListener('org.ekstep.contentrenderer.questionunit' + ":playaudio", this.playAudioWrap, this);
+    EkstepRendererAPI.addEventListener('org.ekstep.contentrenderer.questionunit' + ":geticon", this.getIconWrap, this);
   },
   /**
    * Listener for ':show' event.
@@ -156,6 +158,9 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
       return 'file:///' + EkstepRendererAPI.getBaseURL()+ url;
     }
   },
+  playAudioWrap: function(eventData){
+    this.playAudio(eventData.target)
+  },
   /**
    * play audio based on the assetObj Options
    * @memberof org.ekstep.questionunit
@@ -194,6 +199,25 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    */
   toggleAudio: function(assetObj) {
     HTMLAudioPlayer.togglePlay(this.getAssetUrl(assetObj.src));
+  },
+  /**
+   * Invokes getIcon function, a adaptor for question unit components
+   * @memberof org.ekstep.questionunit
+   * @param {target:String} eventData
+   * getIconWrap('renderer/assets/icon.png')
+   */
+  getIconWrap: function(eventData){
+    var src = this.getIcon(eventData.target.path);
+    $("#"+eventData.target.elementId).attr('src', src);
+  },
+  /**
+   * returns icon url
+   * @memberof org.ekstep.questionunit
+   * @param String eventData
+   * getIcon('renderer/assets/icon.png')
+   */
+  getIcon: function(path){
+    return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
   },
   /**
    * //returns audio icon url
