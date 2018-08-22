@@ -1,15 +1,15 @@
-org.ekstep.contentrenderer.questionunit = org.ekstep.contentrenderer.questionunit || {};
-org.ekstep.contentrenderer.questionunit.questionComponent = {
+org.ekstep.questionunit = org.ekstep.questionunit || {};
+org.ekstep.questionunit.questionComponent = {
     generateQuestionComponent: function () {
         return '\
         <div class="question-container">\
         <% if(question.data.question.image || question.data.question.audio){ %> \
             <div class="image-container">\
             <% if(question.data.question.image){ %> \
-                <img onclick="org.ekstep.contentrenderer.questionunit.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
-                <img onclick="org.ekstep.contentrenderer.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio" src=""  id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg" />\
+                <img onclick="org.ekstep.questionunit.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
+                <img onclick="org.ekstep.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio" src=""  id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg" />\
             <% }else { %>\
-                <img onclick="org.ekstep.contentrenderer.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio no-q-image" src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg"/>\
+                <img onclick="org.ekstep.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio no-q-image" src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg"/>\
             <% } %>\
             </div>\
         <% } %>\
@@ -18,7 +18,7 @@ org.ekstep.contentrenderer.questionunit.questionComponent = {
                 <%= question.data.question.text %>\
                 </div>\
             </div>\
-            <div class="expand-button" onclick="org.ekstep.contentrenderer.questionunit.questionComponent.toggleQuestionText()">\
+            <div class="expand-button" onclick="org.ekstep.questionunit.questionComponent.toggleQuestionText()">\
                 <img src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg"/>\
             </div>\
         </div>\
@@ -52,9 +52,9 @@ org.ekstep.contentrenderer.questionunit.questionComponent = {
     },
     onDomReady: function () {
         this.isQuestionTextOverflow();
-        org.ekstep.contentrenderer.questionunit.questionComponent.getIcon('org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg', 'renderer/assets/down_arrow.png');
-        org.ekstep.contentrenderer.questionunit.questionComponent.getIcon('org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg','renderer/assets/audio-icon.png');
+        org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg'), 'renderer/assets/down_arrow.png');
+        org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg'), 'renderer/assets/audio-icon.png');
     }
 }
-jQuery.extend(org.ekstep.contentrenderer.questionunit.questionComponent, org.ekstep.contentrenderer.questionunit.baseComponent);
-//# sourceURL=org.ekstep.contentrenderer.questionunit.questionComponent.js
+jQuery.extend(org.ekstep.questionunit.questionComponent, org.ekstep.questionunit.baseComponent);
+//# sourceURL=org.ekstep.questionunit.questionComponent.js
