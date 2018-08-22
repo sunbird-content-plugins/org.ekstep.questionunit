@@ -1,15 +1,15 @@
-org.ekstep.contentrenderer.questionunitComponents = org.ekstep.contentrenderer.questionunitComponents || {};
-org.ekstep.contentrenderer.questionunitComponents.questionComponent = {
+org.ekstep.contentrenderer.questionunit = org.ekstep.contentrenderer.questionunit || {};
+org.ekstep.contentrenderer.questionunit.questionComponent = {
     generateQuestionComponent: function () {
         return '\
         <div class="question-container">\
         <% if(question.data.question.image || question.data.question.audio){ %> \
             <div class="image-container">\
             <% if(question.data.question.image){ %> \
-                <img onclick="org.ekstep.contentrenderer.questionunitComponents.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
-                <img onclick=QuestionUnitRendererController.pluginInstance.playAudio({src:"<%= question.data.question.audio %>"}) class="audio" src="<%= QuestionUnitRendererController.pluginInstance.getAudioIcon("renderer/assets/audio-icon.png") %>" />\
+                <img onclick="org.ekstep.contentrenderer.questionunit.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
+                <img onclick="org.ekstep.contentrenderer.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio" src=""  id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg" />\
             <% }else { %>\
-              <img onclick=QuestionUnitRendererController.pluginInstance.playAudio({src:"<%= question.data.question.audio %>"}) class="audio no-q-image" src="<%= QuestionUnitRendererController.pluginInstance.getAudioIcon("renderer/assets/audio-icon.png") %>" />\
+                <img onclick="org.ekstep.contentrenderer.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio no-q-image" src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg"/>\
             <% } %>\
             </div>\
         <% } %>\
@@ -18,8 +18,8 @@ org.ekstep.contentrenderer.questionunitComponents.questionComponent = {
                 <%= question.data.question.text %>\
                 </div>\
             </div>\
-            <div class="expand-button" onclick="org.ekstep.contentrenderer.questionunitComponents.questionComponent.toggleQuestionText()">\
-                <img src="<%= QuestionUnitRendererController.pluginInstance.getAudioIcon("renderer/assets/down_arrow.png") %>" />\
+            <div class="expand-button" onclick="org.ekstep.contentrenderer.questionunit.questionComponent.toggleQuestionText()">\
+                <img src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg"/>\
             </div>\
         </div>\
         ';
@@ -52,27 +52,9 @@ org.ekstep.contentrenderer.questionunitComponents.questionComponent = {
     },
     onDomReady: function () {
         this.isQuestionTextOverflow();
-    },
-    generateModelTemplate: function(){
-        return "<div class='popup' id='image-model-popup' onclick='org.ekstep.contentrenderer.questionunitComponents.questionComponent.hideImageModel()'><div class='popup-overlay' onclick='org.ekstep.contentrenderer.questionunitComponents.questionComponent.hideImageModel()'></div> \
-        <div class='popup-full-body'> \
-            <div class='font-lato assess-popup assess-goodjob-popup'> \
-                <img class='qc-question-fullimage' src=<%= src %> /> \
-                <div onclick='org.ekstep.contentrenderer.questionunitComponents.questionComponent.hideImageModel()' class='qc-popup-close-button'>&times;</div> \
-            </div>\
-        </div>"
-    },
-    showImageModel: function (event, imageSrc) {
-        if (imageSrc) {
-            var modelTemplate = this.generateModelTemplate();
-            var template = _.template(modelTemplate);
-            var templateData = template({
-                src: imageSrc
-            })
-            $(QuestionUnitRendererController.constant.qContainerElement).append(templateData);
-        }
-    },
-    hideImageModel: function () {
-        $("#image-model-popup").remove();
+        org.ekstep.contentrenderer.questionunit.questionComponent.getIcon('org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg', 'renderer/assets/down_arrow.png');
+        org.ekstep.contentrenderer.questionunit.questionComponent.getIcon('org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg','renderer/assets/audio-icon.png');
     }
 }
+jQuery.extend(org.ekstep.contentrenderer.questionunit.questionComponent, org.ekstep.contentrenderer.questionunit.baseComponent);
+//# sourceURL=org.ekstep.contentrenderer.questionunit.questionComponent.js

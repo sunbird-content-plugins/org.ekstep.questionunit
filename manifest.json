@@ -38,6 +38,14 @@
         "dependencies": [
             {
                 "type": "js",
+                "src": "renderer/components/js/base_component.js"
+            },
+            {
+                "type": "css",
+                "src": "renderer/components/css/base_component.css"
+            },
+            {
+                "type": "js",
                 "src": "renderer/components/js/question_component.js"
             },
             {
