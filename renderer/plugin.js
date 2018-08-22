@@ -19,8 +19,8 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     EkstepRendererAPI.addEventListener(this._manifest.id + ":hide", this.hideQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":evaluate", this.evaluateQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":rendermath", this.renderMath, this);
-    EkstepRendererAPI.addEventListener('org.ekstep.contentrenderer.questionunit' + ":playaudio", this.playAudioWrap, this);
-    EkstepRendererAPI.addEventListener('org.ekstep.contentrenderer.questionunit' + ":geticon", this.getIconWrap, this);
+    EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":playaudio", this.handlePlayAudio, this);
+    EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":loadimagefromurl", this.handleLoadImageFromUrl, this);
   },
   /**
    * Listener for ':show' event.
@@ -31,7 +31,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
 
     var template = _.template(this._question.template);
     var questionsetInstance = event.target;
-    $(questionsetInstance._constants.qsElement).html(template({question: this._question}));
+    $(questionsetInstance._constants.qsElement).html(template({ question: this._question }));
 
     this.postQuestionShow(event);
 
@@ -44,7 +44,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    */
   preQuestionShow: function (event) {
     this.setQuestionTemplate();
-    
+
     var questionsetInstance = event.target;
     var qData = questionsetInstance._currentQuestion.data.__cdata || questionsetInstance._currentQuestion.data;
     this.setQuestionData(JSON.parse(qData));
@@ -109,13 +109,13 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * Set the question data
    * @param {object} data - question data
    */
-  setQuestionData: function(data) {
+  setQuestionData: function (data) {
     this._question.data = data;
   },
   /**
    * Get question data
    */
-  getQuestionData: function() {
+  getQuestionData: function () {
     return this._question.data;
   },
   /**
@@ -128,20 +128,20 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
   /**
    * Get question configuration
    */
-  getQuestionConfig: function() {
+  getQuestionConfig: function () {
     return this._question.config;
   },
   /**
    * Set question state
    * @param {object} state - question state
    */
-  setQuestionState: function(state) {
+  setQuestionState: function (state) {
     this._question.state = state;
   },
   /**
    * Get Question state
    */
-  getQuestionState: function() {
+  getQuestionState: function () {
     return this._question.state;
   },
   /**
@@ -150,15 +150,15 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * @param {String} url from question set.
    * @returns {String} url.
    */
-  getAssetUrl:function(url){
-    if(isbrowserpreview){// eslint-disable-line no-undef
+  getAssetUrl: function (url) {
+    if (isbrowserpreview) {// eslint-disable-line no-undef
       return url;
     }
-    else{
-      return 'file:///' + EkstepRendererAPI.getBaseURL()+ url;
+    else {
+      return 'file:///' + EkstepRendererAPI.getBaseURL() + url;
     }
   },
-  playAudioWrap: function(eventData){
+  handlePlayAudio: function (eventData) {
     this.playAudio(eventData.target)
   },
   /**
@@ -167,8 +167,8 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * @param {{src:String, loop: Boolean}} assetObj from question set.
    * @example playAudio(src: "/assets/public/content/rani1_1466755651199.mp3", loop: true)
    */
-  playAudio: function(assetObj){
-    if(assetObj.loop) 
+  playAudio: function (assetObj) {
+    if (assetObj.loop)
       HTMLAudioPlayer.loop(this.getAssetUrl(assetObj.src));
     else
       HTMLAudioPlayer.play(this.getAssetUrl(assetObj.src));
@@ -179,7 +179,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * @param {{src:String}} assetObj
    * @example pauseAudio(src: "/assets/public/content/rani1_1466755651199.mp3")
    */
-  pauseAudio: function(assetObj) {
+  pauseAudio: function (assetObj) {
     HTMLAudioPlayer.pause(this.getAssetUrl(assetObj.src));
   },
   /**
@@ -188,7 +188,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * @param {{src:String}} assetObj
    * @example stopAudio(src: "/assets/public/content/rani1_1466755651199.mp3")
    */
-  stopAudio: function(assetObj) {
+  stopAudio: function (assetObj) {
     HTMLAudioPlayer.stop(this.getAssetUrl(assetObj.src));
   },
   /**
@@ -197,18 +197,17 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * @param {{src:String}} assetObj
    * @example toggleAudio(src: "/assets/public/content/rani1_1466755651199.mp3")
    */
-  toggleAudio: function(assetObj) {
+  toggleAudio: function (assetObj) {
     HTMLAudioPlayer.togglePlay(this.getAssetUrl(assetObj.src));
   },
   /**
    * Invokes getIcon function, a adaptor for question unit components
    * @memberof org.ekstep.questionunit
    * @param {target:String} eventData
-   * getIconWrap('renderer/assets/icon.png')
    */
-  getIconWrap: function(eventData){
+  handleLoadImageFromUrl: function (eventData) {
     var src = this.getIcon(eventData.target.path);
-    $("#"+eventData.target.elementId).attr('src', src);
+    eventData.target.element.attr('src', src);
   },
   /**
    * returns icon url
@@ -216,14 +215,14 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * @param String eventData
    * getIcon('renderer/assets/icon.png')
    */
-  getIcon: function(path){
+  getIcon: function (path) {
     return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
   },
   /**
    * //returns audio icon url
    * getAudioIcon('renderer/assets/icon.png')
    */
-  getAudioIcon:function(path){
+  getAudioIcon: function (path) {
     return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
   },
   renderMath: function (event) {

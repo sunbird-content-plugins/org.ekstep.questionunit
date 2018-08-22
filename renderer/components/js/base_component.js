@@ -1,17 +1,17 @@
-org.ekstep.contentrenderer.questionunit = org.ekstep.contentrenderer.questionunit || {};
-org.ekstep.contentrenderer.questionunit.baseComponent = {
+org.ekstep.questionunit = org.ekstep.questionunit || {};
+org.ekstep.questionunit.baseComponent = {
     playAudio: function (audioObj) {
-        EkstepRendererAPI.dispatchEvent('org.ekstep.contentrenderer.questionunit:playaudio', audioObj)
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:playaudio', audioObj)
     },
-    getIcon: function (elementId, iconUrl) {
-        EkstepRendererAPI.dispatchEvent('org.ekstep.contentrenderer.questionunit:geticon', { 'elementId': elementId, 'path': iconUrl });
+    loadImageFromUrl: function (element, imgUrl) {
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadimagefromurl', { 'element': element, 'path': imgUrl });
     },
-    generateModelTemplate: function(){
-        return "<div class='popup' id='image-model-popup' onclick='org.ekstep.contentrenderer.questionunit.questionComponent.hideImageModel()'><div class='popup-overlay' onclick='org.ekstep.contentrenderer.questionunit.questionComponent.hideImageModel()'></div> \
+    generateModelTemplate: function () {
+        return "<div class='popup' id='image-model-popup' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'><div class='popup-overlay' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'></div> \
         <div class='popup-full-body'> \
             <div class='font-lato assess-popup assess-goodjob-popup'> \
                 <img class='qc-question-fullimage' src=<%= src %> /> \
-                <div onclick='org.ekstep.contentrenderer.questionunit.questionComponent.hideImageModel()' class='qc-popup-close-button'>&times;</div> \
+                <div onclick='org.ekstep.questionunit.questionComponent.hideImageModel()' class='qc-popup-close-button'>&times;</div> \
             </div>\
         </div>"
     },
@@ -31,4 +31,4 @@ org.ekstep.contentrenderer.questionunit.baseComponent = {
 
 }
 
-//# sourceURL=org.ekstep.contentrenderer.questionunit.baseComponent.js
+//# sourceURL=org.ekstep.questionunit.baseComponent.js
