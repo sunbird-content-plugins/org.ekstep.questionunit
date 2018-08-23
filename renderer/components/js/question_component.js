@@ -21,7 +21,7 @@ org.ekstep.questionunit.questionComponent = {
             <div class="expand-button" onclick="org.ekstep.questionunit.questionComponent.toggleQuestionText()">\
                 <img src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg"/>\
             </div>\
-        </div>\
+        </div><script>org.ekstep.questionunit.questionComponent.onDomReady();</script>\
         ';
     },
     isQuestionTextOverflow: function () {
