@@ -22,7 +22,7 @@ org.ekstep.questionunit.baseComponent = {
             var templateData = template({
                 src: imageSrc
             })
-            $('.question-content-container').append(templateData);
+            $('.plugin-content-container').append(templateData);
         }
     },
     hideImageModel: function () {
