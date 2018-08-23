@@ -1,0 +1,111 @@
+.question-container .image-container img.audio, .question-container .image-container img.q-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+.question-container {
+    padding: 1.875% 0%;
+    height: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.question-container .image-container {
+    width: 14%;
+    float: left;
+    top: 0;
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    margin-left: 9%;
+}
+
+.question-container .image-container img.q-image {
+    max-width: 100%;
+    max-height: 100%;
+    float: left;
+    right: 0;
+    cursor: pointer;
+}
+
+.question-container .image-container img.audio {
+    width: 30%;
+    float: left;
+    right: -13%;
+    cursor: pointer;
+}
+
+.question-container .image-container img.audio.no-q-image {
+    width: 50%;
+    float: left;
+    right: 18%;
+}
+
+.question-container .hiding-container {
+    width:100%;
+    height: 50%;
+    padding: 0% 14.0625%;
+    overflow: hidden;
+    background: white;
+    position: absolute;
+    z-index: 1;
+}
+
+.question-container .hiding-container .expand-container {
+    max-height: 70vh;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.question-container .hiding-container .expand-container::-webkit-scrollbar {
+    width: 0px;
+    /* remove scrollbar space */
+    background: transparent;
+    /* optional: just make scrollbar invisible */
+}
+
+/* optional: show position indicator in red */
+
+.question-container .hiding-container .expand-container::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+.question-container .hiding-container .expand-container.with-media {
+    padding-left: 18%;
+}
+
+.question-container .hiding-container .expand-container p {
+    margin-top: 0;
+}
+
+.question-container .expand-button {
+    position: absolute;
+    background-color: #E3E3E3;
+    width: 9%;
+    border-radius: 9px;
+    height: 21.8%;
+    bottom: 5%;
+    right: 9%;
+    z-index: 2;
+    cursor: pointer;
+    display: none;
+}
+
+.question-container .expand-button img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 70%;
+}
+
+.question-container .expand-button img.flip{
+    transform:rotate(180deg);
+}
