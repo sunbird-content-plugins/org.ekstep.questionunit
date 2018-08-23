@@ -51,6 +51,14 @@
             {
                 "type": "css",
                 "src": "renderer/components/css/question_component.css"
+            },
+            {
+                "type": "js",
+                "src": "renderer/components/js/background_component.js"
+            },
+            {
+                "type": "css",
+                "src": "renderer/components/css/background_component.css"
             }
         ]
     }
