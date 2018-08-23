@@ -6,15 +6,6 @@
     margin: auto;
 }
 
-.question-container .expand-button img {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-
 .question-container {
     padding: 1.875% 0%;
     height: 100%;
@@ -106,5 +97,15 @@
 }
 
 .question-container .expand-button img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
     height: 70%;
+}
+
+.question-container .expand-button img.flip{
+    transform:rotate(180deg);
 }

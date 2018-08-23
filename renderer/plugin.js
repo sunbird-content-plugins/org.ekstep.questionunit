@@ -206,7 +206,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * @param {target:String} eventData
    */
   handleLoadImageFromUrl: function (eventData) {
-    var src = this.getIcon(eventData.target.path);
+    var src = this.getIcon(eventData.target.path, eventData.target.pluginId, eventData.target.pluginVer);
     eventData.target.element.attr('src', src);
   },
   /**
@@ -215,8 +215,8 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * @param String eventData
    * getIcon('renderer/assets/icon.png')
    */
-  getIcon: function (path) {
-    return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
+  getIcon: function (path, pluginId, pluginVer) {
+    return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(pluginId || this._manifest.id, pluginVer || this._manifest.ver, path));
   },
   /**
    * //returns audio icon url

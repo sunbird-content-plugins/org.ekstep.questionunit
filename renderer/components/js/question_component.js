@@ -52,7 +52,7 @@ org.ekstep.questionunit.questionComponent = {
     },
     onDomReady: function () {
         this.isQuestionTextOverflow();
-        org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg'), 'renderer/assets/down_arrow.png');
+        org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg'), 'renderer/assets/down_arrow.png', 'org.ekstep.questionunit', '1.0');
         org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg'), 'renderer/assets/audio-icon.png');
     }
 }

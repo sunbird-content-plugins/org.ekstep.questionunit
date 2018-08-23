@@ -3,8 +3,8 @@ org.ekstep.questionunit.baseComponent = {
     playAudio: function (audioObj) {
         EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:playaudio', audioObj)
     },
-    loadImageFromUrl: function (element, imgUrl) {
-        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadimagefromurl', { 'element': element, 'path': imgUrl });
+    loadImageFromUrl: function (element, imgUrl, pluginId, pluginVer) {
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadimagefromurl', { 'element': element, 'path': imgUrl, 'pluginId': pluginId, 'pluginVer': pluginVer });
     },
     generateModelTemplate: function () {
         return "<div class='popup' id='image-model-popup' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'><div class='popup-overlay' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'></div> \
