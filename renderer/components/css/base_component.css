@@ -1,0 +1,49 @@
+body {
+  font-family: NotoSans, NotoSansOriya, NotoSansGujarati, NotoSansMalayalam;
+  line-height: 18px;
+}
+/* From here image model popup style */
+.qc-popup-close-button {
+    cursor: pointer;
+    position: absolute;
+    right: -35px;
+    color: white;
+    bottom: 87%;
+  }
+  
+  #image-model-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+  
+  #image-model-popup .popup-overlay {
+    opacity: 0.8;
+  }
+  
+  #image-model-popup .popup-full-body {
+    width: auto;
+    margin: auto;
+  }
+  
+  #image-model-popup .assess-popup {
+    position: relative;
+    width: fit-content;
+    top: 0;
+    left: 0;
+    margin: auto;
+  }
+  
+  #image-model-popup img.qc-question-fullimage {
+    max-width: 60vw;
+    max-height: 100%;
+  }
+  
+  #image-model-popup .qc-popup-close-button {
+    position: absolute;
+    right: -15px;
+    top: -20px;
+    color: white;
+    font-size: 20px;
+  }
