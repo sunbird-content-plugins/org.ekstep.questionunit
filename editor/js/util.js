@@ -57,7 +57,7 @@ angular.module('org.ekstep.question').directive('selectedMediaContainer', functi
               <audio src="{{formdata.audio}}" controls controlsList="nodownload" preload="none" class="selected-audio"\
                  data-tooltip="Play audio" data-inverted="">\
               </audio>\
-              <i ng-click="callbacks.addMedia(qEleType, mediaIndex, \'audio\');" class="music icon"></i><p>{{formdata.audioName}}</p>\
+              <i ng-click="callbacks.addMedia(qEleType, mediaIndex, \'audio\');" class="music icon"></i><p ng-click="callbacks.addMedia(qEleType, mediaIndex, \'audio\');">{{formdata.audioName}}</p>\
                 </div>\
                 <div class="delete-media-container">\
                     <a href="" ng-click="callbacks.deleteMedia(qEleType, mediaIndex, \'audio\');" class="deleteMedia" data-tooltip="Delete audio" data-inverted="">\
