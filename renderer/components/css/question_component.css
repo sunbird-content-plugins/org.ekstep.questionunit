@@ -12,6 +12,7 @@
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
     position: relative;
+    z-index: 3;
 }
 
 .question-container .image-container {
