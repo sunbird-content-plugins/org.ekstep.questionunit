@@ -37,9 +37,11 @@ org.ekstep.questionunit.questionComponent = {
         <div class="question-container">\
         <% if(question.data.question.image || question.data.question.audio){ %> \
             <div class="image-container">\
-            <% if(question.data.question.image){ %> \
+            <% if(question.data.question.image && question.data.question.audio){ %> \
                 <img onclick="org.ekstep.questionunit.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
                 <img onclick="org.ekstep.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio" src=""  id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg" />\
+            <% }else if(question.data.question.image){ %> \
+                <img onclick="org.ekstep.questionunit.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
             <% }else { %>\
                 <img onclick="org.ekstep.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio no-q-image" src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg"/>\
             <% } %>\
