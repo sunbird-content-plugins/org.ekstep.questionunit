@@ -38,27 +38,11 @@
         "dependencies": [
             {
                 "type": "js",
-                "src": "renderer/components/js/base_component.js"
+                "src": "renderer/components/js/components.js"
             },
             {
                 "type": "css",
-                "src": "renderer/components/css/base_component.css"
-            },
-            {
-                "type": "js",
-                "src": "renderer/components/js/question_component.js"
-            },
-            {
-                "type": "css",
-                "src": "renderer/components/css/question_component.css"
-            },
-            {
-                "type": "js",
-                "src": "renderer/components/js/background_component.js"
-            },
-            {
-                "type": "css",
-                "src": "renderer/components/css/background_component.css"
+                "src": "renderer/components/css/components.css"
             }
         ]
     }
