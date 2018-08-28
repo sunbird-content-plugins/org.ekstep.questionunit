@@ -69,7 +69,7 @@ org.ekstep.questionunit.questionComponent = {
     },
     toggleQuestionText: function () {
         if ($('.hiding-container').hasClass('expanded')) {
-            $('.hiding-container').css('height', '50%');
+            $('.hiding-container').css('height', '60%');
             $('.hiding-container').removeClass('expanded')
             $(".expand-button img").toggleClass('flip');
             $('.hiding-container').css('padding-bottom', '0px');
