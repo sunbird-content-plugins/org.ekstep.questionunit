@@ -1,13 +1,47 @@
 org.ekstep.questionunit = org.ekstep.questionunit || {};
+org.ekstep.questionunit.baseComponent = {
+    playAudio: function (audioObj) {
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:playaudio', audioObj)
+    },
+    loadImageFromUrl: function (element, imgUrl, pluginId, pluginVer) {
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadimagefromurl', { 'element': element, 'path': imgUrl, 'pluginId': pluginId, 'pluginVer': pluginVer });
+    },
+    generateModelTemplate: function () {
+        return "<div class='popup' id='image-model-popup' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'><div class='popup-overlay' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'></div> \
+        <div class='popup-full-body'> \
+            <div class='font-lato assess-popup assess-goodjob-popup'> \
+                <img class='qc-question-fullimage' src=<%= src %> /> \
+                <div onclick='org.ekstep.questionunit.questionComponent.hideImageModel()' class='qc-popup-close-button'>&times;</div> \
+            </div>\
+        </div>"
+    },
+    showImageModel: function (event, imageSrc) {
+        if (imageSrc) {
+            var modelTemplate = this.generateModelTemplate();
+            var template = _.template(modelTemplate);
+            var templateData = template({
+                src: imageSrc
+            })
+            $('.plugin-content-container').append(templateData);
+        }
+    },
+    hideImageModel: function () {
+        $("#image-model-popup").remove();
+    }
+}
+
+org.ekstep.questionunit = org.ekstep.questionunit || {};
 org.ekstep.questionunit.questionComponent = {
     generateQuestionComponent: function () {
         return '\
         <div class="question-container">\
         <% if(question.data.question.image || question.data.question.audio){ %> \
             <div class="image-container">\
-            <% if(question.data.question.image){ %> \
+            <% if(question.data.question.image && question.data.question.audio){ %> \
                 <img onclick="org.ekstep.questionunit.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
                 <img onclick="org.ekstep.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio" src=""  id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg" />\
+            <% }else if(question.data.question.image){ %> \
+                <img onclick="org.ekstep.questionunit.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
             <% }else { %>\
                 <img onclick="org.ekstep.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio no-q-image" src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg"/>\
             <% } %>\
@@ -57,4 +91,20 @@ org.ekstep.questionunit.questionComponent = {
     }
 }
 jQuery.extend(org.ekstep.questionunit.questionComponent, org.ekstep.questionunit.baseComponent);
-//# sourceURL=org.ekstep.questionunit.questionComponent.js
+
+org.ekstep.questionunit = org.ekstep.questionunit || {};
+org.ekstep.questionunit.backgroundComponent = {
+    settings: {
+        bgColors: ["#5DC4F5", "#FF7474", "#F9A817", "#48DCB6", "#5B6066"],
+        bgColor: "#5DC4F5"
+    },
+    getBackgroundGraphics: function () {
+        org.ekstep.questionunit.backgroundComponent.settings.bgColor = org.ekstep.questionunit.backgroundComponent.settings.bgColors[_.random(0, org.ekstep.questionunit.backgroundComponent.settings.bgColors.length - 1)];
+        return '\
+            <div class="bg-graphics" style="background-color:<%= org.ekstep.questionunit.backgroundComponent.settings.bgColor %>">\
+                <div class="bg-circle circle-left" style="top:<%= _.random(-6, 6)*10%>vh" ></div ><div class="bg-circle circle-right" style="top:<%= _.random(-6, 6)*10%>vh"></div>\
+            </div >'
+    }
+};
+
+//# sourceURL=org.ekstep.questionunit.components.js
