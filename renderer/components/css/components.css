@@ -52,6 +52,19 @@ body {
     font-size: 20px;
 }
 
+/* question component css */
+
+.absolute-center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
 .question-container .image-container img.audio, .question-container .image-container img.q-image {
     position: absolute;
     top: 0;
@@ -107,13 +120,6 @@ body {
     overflow: hidden;
     background: white;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    justify-content: center;
-    display: flex;
-    align-items: center;
     z-index: 1;
 }
 

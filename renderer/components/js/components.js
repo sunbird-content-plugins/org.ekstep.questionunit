@@ -62,10 +62,12 @@ org.ekstep.questionunit.questionComponent = {
         setTimeout(function () {
             if ($('.hiding-container').height() > $('.expand-container').height()) {
                 $('.expand-button').css('display', 'none');
+                $('.hiding-container').addClass('absolute-center');
+                
             } else {
                 $('.expand-button').css('display', 'block');
             }
-        }, 1000)
+        }, 400)
     },
     toggleQuestionText: function () {
         if ($('.hiding-container').hasClass('expanded')) {
