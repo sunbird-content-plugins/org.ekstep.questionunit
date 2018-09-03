@@ -63,6 +63,7 @@ org.ekstep.questionunit.questionComponent = {
             if ($('.hiding-container').height() > $('.expand-container').height()) {
                 $('.expand-button').css('display', 'none');
                 $('.hiding-container').addClass('absolute-center');
+                $('.hiding-container').css('height', '100%');
                 
             } else {
                 $('.expand-button').css('display', 'block');
