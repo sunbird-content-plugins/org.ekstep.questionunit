@@ -14,6 +14,7 @@ body {
 }
 
 #image-model-popup {
+    z-index: 100001; /* Z index 100001 to hide the menu and refresh icon which has 100000 */
     position: fixed;
     top: 0;
     left: 0;
@@ -100,7 +101,7 @@ body {
 
 .question-container .hiding-container {
     width: 100%;
-    height: 50%;
+    height: 87%;
     padding: 0% 14.0625%;
     overflow: hidden;
     background: white;
@@ -143,7 +144,7 @@ body {
     border-radius: 9px;
     height: 21.8%;
     bottom: 5%;
-    right: 9%;
+    right: 2%;
     z-index: 2;
     cursor: pointer;
     display: none;
