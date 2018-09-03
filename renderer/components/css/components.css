@@ -61,9 +61,7 @@ body {
 
 .question-container {
     padding: 1.875% 0%;
-    height: 24.33333vh;
-    font-size:4vh;
-    line-height: 6.7vh;
+    height: 100%;
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
     position: relative;
