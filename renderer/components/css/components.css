@@ -14,7 +14,8 @@ body {
 }
 
 #image-model-popup {
-    z-index: 100001; /* Z index 100001 to hide the menu and refresh icon which has 100000 */
+    z-index: 100001;
+    /* Z index 100001 to hide the menu and refresh icon which has 100000 */
     position: fixed;
     top: 0;
     left: 0;
@@ -106,6 +107,13 @@ body {
     overflow: hidden;
     background: white;
     position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
     z-index: 1;
 }
 
