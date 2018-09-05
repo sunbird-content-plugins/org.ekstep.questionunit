@@ -19,7 +19,10 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     EkstepRendererAPI.addEventListener(this._manifest.id + ":hide", this.hideQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":evaluate", this.evaluateQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":rendermath", this.renderMath, this);
-    EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":playaudio", this.handlePlayAudio, this);
+    //Currently this plugin is regiesters twice upon rendering, Yet to find what's the issue, registering two event listerns with same function creating problems <Sivashanmugam kannan>
+    if(!EventBus.listeners["org.ekstep.questionunit:playaudio"]){
+      EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":playaudio", this.handlePlayAudio, this);
+    }
     EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":loadimagefromurl", this.handleLoadImageFromUrl, this);
   },
   /**
@@ -171,7 +174,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     if (assetObj.loop)
       HTMLAudioPlayer.loop(this.getAssetUrl(assetObj.src));
     else
-      HTMLAudioPlayer.play(this.getAssetUrl(assetObj.src));
+      HTMLAudioPlayer.togglePlay(this.getAssetUrl(assetObj.src));
   },
   /**
    * pauses audio
