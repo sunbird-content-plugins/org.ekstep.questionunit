@@ -62,14 +62,18 @@ org.ekstep.questionunit.questionComponent = {
         setTimeout(function () {
             if ($('.hiding-container').height() > $('.expand-container').height()) {
                 $('.expand-button').css('display', 'none');
+                $('.hiding-container').addClass('absolute-center');
+                $('.hiding-container').css('height', '100%');
+                
             } else {
                 $('.expand-button').css('display', 'block');
             }
-        }, 1000)
+        }, 400)
     },
     toggleQuestionText: function () {
         if ($('.hiding-container').hasClass('expanded')) {
-            $('.hiding-container').css('height', '50%');
+            $('.hiding-container').css('height', '87%');
+            $('.hiding-container').css('box-shadow', 'none');
             $('.hiding-container').removeClass('expanded')
             $(".expand-button img").toggleClass('flip');
             $('.hiding-container').css('padding-bottom', '0px');
@@ -78,6 +82,7 @@ org.ekstep.questionunit.questionComponent = {
             var expandButtonBottom = parseFloat($('.expand-button').css('bottom'));
             $('.hiding-container').addClass('expanded')
             $('.hiding-container').css('height', 'auto');
+            $('.hiding-container').css('box-shadow', '0 2px 4px 0 rgba(0, 0, 0, 0.15)');
             $(".expand-button img").toggleClass('flip');
             $('.hiding-container').css('padding-bottom', $(".expand-button").height() + 'px');
             expandButtonBottom = expandButtonBottom - ($('.hiding-container').height() - $('.question-container').height());
@@ -95,7 +100,7 @@ jQuery.extend(org.ekstep.questionunit.questionComponent, org.ekstep.questionunit
 org.ekstep.questionunit = org.ekstep.questionunit || {};
 org.ekstep.questionunit.backgroundComponent = {
     settings: {
-        bgColors: ["#5DC4F5", "#FF7474", "#F9A817", "#48DCB6", "#5B6066"],
+        bgColors: ["#5DC4F5", "#FF7474", "#F9A817", "#48DCB6", "#D2D2D2"],
         bgColor: "#5DC4F5"
     },
     getBackgroundGraphics: function () {
