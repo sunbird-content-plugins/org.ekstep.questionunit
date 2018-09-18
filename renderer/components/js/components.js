@@ -6,6 +6,9 @@ org.ekstep.questionunit.baseComponent = {
     loadImageFromUrl: function (element, imgUrl, pluginId, pluginVer) {
         EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadimagefromurl', { 'element': element, 'path': imgUrl, 'pluginId': pluginId, 'pluginVer': pluginVer });
     },
+    loadAssetUrl: function(element, imgUrl, pluginId, pluginVer){
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadAssetUrl', { 'element': element, 'path': imgUrl, 'pluginId': pluginId, 'pluginVer': pluginVer });
+    },
     generateModelTemplate: function () {
         return "<div class='popup' id='image-model-popup' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'><div class='popup-overlay' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'></div> \
         <div class='popup-full-body'> \
@@ -15,8 +18,12 @@ org.ekstep.questionunit.baseComponent = {
             </div>\
         </div>"
     },
-    showImageModel: function (event, imageSrc) {
-        if (imageSrc) {
+    showImageModel: function (event, imageSrc, elementId) {
+        if(elementId){
+            imageSrc = $("#"+elementId).attr('src');
+        }
+
+        if(imageSrc){
             var modelTemplate = this.generateModelTemplate();
             var template = _.template(modelTemplate);
             var templateData = template({
@@ -38,10 +45,10 @@ org.ekstep.questionunit.questionComponent = {
         <% if(question.data.question.image || question.data.question.audio){ %> \
             <div class="image-container">\
             <% if(question.data.question.image && question.data.question.audio){ %> \
-                <img onclick="org.ekstep.questionunit.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
+                <img data-image="<%= question.data.question.image %>" id="org-ekstep-questionunit-questionComponent-qimage" onclick="org.ekstep.questionunit.questionComponent.showImageModel(event, undefined, \'org-ekstep-questionunit-questionComponent-qimage\')" class="q-image" src="" />\
                 <img onclick="org.ekstep.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio" src=""  id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg" />\
             <% }else if(question.data.question.image){ %> \
-                <img onclick="org.ekstep.questionunit.questionComponent.showImageModel(event, \'<%= question.data.question.image %>\')" class="q-image" src="<%= question.data.question.image %>" />\
+                <img data-image="<%= question.data.question.image %>" id="org-ekstep-questionunit-questionComponent-qimage" onclick="org.ekstep.questionunit.questionComponent.showImageModel(event, undefined, \'org-ekstep-questionunit-questionComponent-qimage\')" class="q-image" src="" />\
             <% }else { %>\
                 <img onclick="org.ekstep.questionunit.questionComponent.playAudio({src:\'<%= question.data.question.audio %>\'})" class="audio no-q-image" src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg"/>\
             <% } %>\
@@ -93,6 +100,7 @@ org.ekstep.questionunit.questionComponent = {
         this.isQuestionTextOverflow();
         org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg'), 'renderer/assets/down_arrow.png', 'org.ekstep.questionunit', '1.0');
         org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg'), 'renderer/assets/audio-icon.png', 'org.ekstep.questionunit', '1.0');
+        org.ekstep.questionunit.questionComponent.loadAssetUrl($('#org-ekstep-questionunit-questionComponent-qimage'),$('#org-ekstep-questionunit-questionComponent-qimage').data('image'), 'org.ekstep.questionunit', '1.0');
     }
 }
 jQuery.extend(org.ekstep.questionunit.questionComponent, org.ekstep.questionunit.baseComponent);
