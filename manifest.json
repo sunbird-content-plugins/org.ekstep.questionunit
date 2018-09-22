@@ -1,6 +1,6 @@
 {
     "id": "org.ekstep.questionunit",
-    "ver": "1.0",
+    "ver": "1.1",
     "author": "Manoj Chandrashekar",
     "type": "plugin",
     "title": "Question Unit Base Plugin",
@@ -20,12 +20,12 @@
             {
                 "type": "plugin",
                 "plugin": "org.ekstep.mathtext",
-                "ver": "1.0"
+                "ver": "1.1"
             },
             {
                 "type": "plugin",
                 "plugin": "org.ekstep.libs.ckeditor",
-                "ver": "1.0"
+                "ver": "1.1"
             }
         ],
         "help": {
@@ -38,15 +38,15 @@
         "dependencies": [
             {
                 "type": "image",
-                "src":"renderer/assets/audio-icon.png",
-                "id":"org.ekstep.questionunit.renderer.audioicon",
-                "assetId":"org.ekstep.questionunit.renderer.audioicon"
+                "src": "renderer/assets/audio-icon.png",
+                "id": "org.ekstep.questionunit.renderer.audioicon",
+                "assetId": "org.ekstep.questionunit.renderer.audioicon"
             },
             {
                 "type": "image",
-                "src":"renderer/assets/down_arrow.png",
-                "id":"org.ekstep.questionunit.renderer.downarrow",
-                "assetId":"org.ekstep.questionunit.renderer.downarrow"
+                "src": "renderer/assets/down_arrow.png",
+                "id": "org.ekstep.questionunit.renderer.downarrow",
+                "assetId": "org.ekstep.questionunit.renderer.downarrow"
             },
             {
                 "type": "js",
