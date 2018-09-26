@@ -1,6 +1,6 @@
 {
     "id": "org.ekstep.questionunit",
-    "ver": "1.1",
+    "ver": "1.0",
     "author": "Manoj Chandrashekar",
     "type": "plugin",
     "title": "Question Unit Base Plugin",
@@ -20,12 +20,12 @@
             {
                 "type": "plugin",
                 "plugin": "org.ekstep.mathtext",
-                "ver": "1.1"
+                "ver": "1.0"
             },
             {
                 "type": "plugin",
                 "plugin": "org.ekstep.libs.ckeditor",
-                "ver": "1.1"
+                "ver": "1.0"
             }
         ],
         "help": {
@@ -107,7 +107,7 @@
             {
                 "type": "js",
                 "src": "renderer/libs/katex/fonts/katex_size4-regular.ttf"
-            }
+            }	            
         ]
     }
 }
