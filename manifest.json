@@ -37,6 +37,26 @@
         "main": "renderer/plugin.js",
         "dependencies": [
             {
+                "type": "image",
+                "src": "renderer/assets/audio-icon.png",
+                "id": "org.ekstep.questionunit.renderer.audioicon",
+                "assetId": "org.ekstep.questionunit.renderer.audioicon"
+            },
+            {
+                "type": "image",
+                "src": "renderer/assets/down_arrow.png",
+                "id": "org.ekstep.questionunit.renderer.downarrow",
+                "assetId": "org.ekstep.questionunit.renderer.downarrow"
+            },
+            {
+                "type": "js",
+                "src": "renderer/components/js/components.js"
+            },
+            {
+                "type": "css",
+                "src": "renderer/components/css/components.css"
+            },
+            {
                 "type": "js",
                 "src": "renderer/libs/katex/katex.min.js"
             },
@@ -87,7 +107,7 @@
             {
                 "type": "js",
                 "src": "renderer/libs/katex/fonts/katex_size4-regular.ttf"
-            }
+            }	            
         ]
     }
 }
