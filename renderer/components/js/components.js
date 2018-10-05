@@ -66,16 +66,13 @@ org.ekstep.questionunit.questionComponent = {
         ';
     },
     isQuestionTextOverflow: function () {
-        setTimeout(function () {
-            if ($('.hiding-container').height() > $('.expand-container').height()) {
-                $('.expand-button').css('display', 'none');
-                $('.hiding-container').addClass('absolute-center');
-                $('.hiding-container').css('height', '100%');
-                
-            } else {
-                $('.expand-button').css('display', 'block');
-            }
-        }, 400)
+        if ($('.hiding-container').height() > $('.expand-container').height()) {
+            $('.expand-button').css('display', 'none');
+            $('.hiding-container').addClass('absolute-center');
+            $('.hiding-container').css('height', '100%');
+        } else {
+            $('.expand-button').css('display', 'block');
+        }
     },
     toggleQuestionText: function () {
         if ($('.hiding-container').hasClass('expanded')) {
