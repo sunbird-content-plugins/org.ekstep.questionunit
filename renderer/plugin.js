@@ -20,8 +20,9 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     EkstepRendererAPI.addEventListener(this._manifest.id + ":evaluate", this.evaluateQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":rendermath", this.renderMath, this);
     //Currently this plugin is regiesters twice upon rendering, Yet to find what's the issue, registering two event listerns with same function creating problems <Sivashanmugam kannan>
-    if(!EventBus.listeners["org.ekstep.questionunit:playaudio"]){
+    if (!EventBus.listeners["org.ekstep.questionunit:playaudio"]) {
       EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":playaudio", this.handlePlayAudio, this);
+      EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":stopallaudio", this.stopAllAudio, this);
     }
     EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":loadimagefromurl", this.handleLoadImageFromUrl, this);
     EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":loadAssetUrl", this.handleGetAssetUrl, this);
@@ -165,6 +166,9 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
   handlePlayAudio: function (eventData) {
     this.playAudio(eventData.target)
   },
+  stopAllAudio: function () {
+    HTMLAudioPlayer.stopAll();
+  },
   /**
    * play audio based on the assetObj Options
    * @memberof org.ekstep.questionunit
@@ -213,7 +217,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     var src = this.getIcon(eventData.target.path, eventData.target.pluginId, eventData.target.pluginVer);
     eventData.target.element.attr('src', src);
   },
-  handleGetAssetUrl: function(eventData){
+  handleGetAssetUrl: function (eventData) {
     var src = this.getAssetUrl(eventData.target.path, eventData.target.pluginId, eventData.target.pluginVer);
     eventData.target.element.attr('src', src);
   },
@@ -240,7 +244,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
       return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
     }
     else {
-      return 'file:///' + EkstepRendererAPI.getBaseURL() + 'content-plugins/' + this._manifest.id + '-' +this._manifest.ver + '/' + path;
+      return 'file:///' + EkstepRendererAPI.getBaseURL() + 'content-plugins/' + this._manifest.id + '-' + this._manifest.ver + '/' + path;
     }
   },
   renderMath: function (event) {
