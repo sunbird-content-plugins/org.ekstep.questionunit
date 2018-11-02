@@ -19,8 +19,12 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     EkstepRendererAPI.addEventListener(this._manifest.id + ":hide", this.hideQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":evaluate", this.evaluateQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":rendermath", this.renderMath, this);
-    EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":playaudio", this.handlePlayAudio, this);
+    //Currently this plugin is regiesters twice upon rendering, Yet to find what's the issue, registering two event listerns with same function creating problems <Sivashanmugam kannan>
+    if(!EventBus.listeners["org.ekstep.questionunit:playaudio"]){
+      EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":playaudio", this.handlePlayAudio, this);
+    }
     EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":loadimagefromurl", this.handleLoadImageFromUrl, this);
+    EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":loadAssetUrl", this.handleGetAssetUrl, this);
   },
   /**
    * Listener for ':show' event.
@@ -171,7 +175,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     if (assetObj.loop)
       HTMLAudioPlayer.loop(this.getAssetUrl(assetObj.src));
     else
-      HTMLAudioPlayer.play(this.getAssetUrl(assetObj.src));
+      HTMLAudioPlayer.togglePlay(this.getAssetUrl(assetObj.src));
   },
   /**
    * pauses audio
@@ -209,6 +213,10 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     var src = this.getIcon(eventData.target.path, eventData.target.pluginId, eventData.target.pluginVer);
     eventData.target.element.attr('src', src);
   },
+  handleGetAssetUrl: function(eventData){
+    var src = this.getAssetUrl(eventData.target.path, eventData.target.pluginId, eventData.target.pluginVer);
+    eventData.target.element.attr('src', src);
+  },
   /**
    * returns icon url
    * @memberof org.ekstep.questionunit
@@ -216,14 +224,24 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * getIcon('renderer/assets/icon.png')
    */
   getIcon: function (path, pluginId, pluginVer) {
-    return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(pluginId || this._manifest.id, pluginVer || this._manifest.ver, path));
+    if (isbrowserpreview) {// eslint-disable-line no-undef
+      return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(pluginId, pluginVer, path));
+    }
+    else {
+      return 'file:///' + EkstepRendererAPI.getBaseURL() + 'content-plugins/' + pluginId + '-' + pluginVer + '/' + path;
+    }
   },
   /**
    * //returns audio icon url
    * getAudioIcon('renderer/assets/icon.png')
    */
   getAudioIcon: function (path) {
-    return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
+    if (isbrowserpreview) {// eslint-disable-line no-undef
+      return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
+    }
+    else {
+      return 'file:///' + EkstepRendererAPI.getBaseURL() + 'content-plugins/' + this._manifest.id + '-' +this._manifest.ver + '/' + path;
+    }
   },
   renderMath: function (event) {
     setTimeout(function () {
