@@ -59,7 +59,7 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
     });
   },
 
-  setMedia: function(media){
+  setMedia: function(media, oldMedia){
     var instance = this;
     var mediaObject = {};
     if(media.type == 'default') {
@@ -79,16 +79,19 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
       mediaObject = media;
     }
     this._media = mediaObject;
-    instance.setAllMedia(mediaObject);
+    instance.setAllMedia(mediaObject, oldMedia);
   },
 
-  getMedia: function(){
-    return this._media;
-  },
-
-  setAllMedia: function(media){
+  setAllMedia: function(media, oldMedia){
     var instance = this;
-    this._allMedia.push(media);
+    if(_.isUndefined(oldMedia)){
+      this._allMedia.push(media);
+    }
+    else {
+      var mediaToBeUpdated = _.find(this._allMedia, function(mediaObj) { return mediaObj.id == oldMedia.id; });
+      var updateMediaIndex = _.indexOf(this._allMedia, mediaToBeUpdated);
+      if (updateMediaIndex) this._allMedia.splice(updateMediaIndex, 1, media);
+    }
     this._allMedia = _.unionBy(this._allMedia, 'id');
   },
 
@@ -96,8 +99,8 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
     return this._allMedia;
   },
 
-  removeMedia: function(media){
-    var mediaToBeDeleted = _.find(this._allMedia, function(mediaObj) { return mediaObj.id == media.id; });
+  removeMedia: function(key, mediaValue){
+    var mediaToBeDeleted = _.find(this._allMedia, function(mediaObj) { return mediaObj[key] == mediaValue; });
     var deleteMediaIndex = _.indexOf(this._allMedia, mediaToBeDeleted);
     if (deleteMediaIndex) this._allMedia.splice(deleteMediaIndex, 1);
   }
