@@ -7,6 +7,7 @@
 org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugin.extend({
   type: "org.ekstep.contenteditor.questionUnitPlugin",
   _data: {},
+  _allMedia: [],
   /**
    * Initialize the plugin
    * Load CKEditor, call beforeInit and beforeInit
