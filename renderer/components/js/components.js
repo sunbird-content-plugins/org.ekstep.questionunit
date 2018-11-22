@@ -4,10 +4,20 @@ org.ekstep.questionunit.baseComponent = {
         EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:playaudio', audioObj)
     },
     loadImageFromUrl: function (element, imgUrl, pluginId, pluginVer) {
-        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadimagefromurl', { 'element': element, 'path': imgUrl, 'pluginId': pluginId, 'pluginVer': pluginVer });
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadimagefromurl', {
+            'element': element,
+            'path': imgUrl,
+            'pluginId': pluginId,
+            'pluginVer': pluginVer
+        });
     },
-    loadAssetUrl: function(element, imgUrl, pluginId, pluginVer){
-        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadAssetUrl', { 'element': element, 'path': imgUrl, 'pluginId': pluginId, 'pluginVer': pluginVer });
+    loadAssetUrl: function (element, imgUrl, pluginId, pluginVer) {
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadAssetUrl', {
+            'element': element,
+            'path': imgUrl,
+            'pluginId': pluginId,
+            'pluginVer': pluginVer
+        });
     },
     generateModelTemplate: function () {
         return "<div class='popup' id='image-model-popup' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'><div class='popup-overlay' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'></div> \
@@ -19,11 +29,11 @@ org.ekstep.questionunit.baseComponent = {
         </div>"
     },
     showImageModel: function (event, imageSrc, elementId) {
-        if(elementId){
-            imageSrc = $("#"+elementId).attr('src');
+        if (elementId) {
+            imageSrc = $("#" + elementId).attr('src');
         }
 
-        if(imageSrc){
+        if (imageSrc) {
             var modelTemplate = this.generateModelTemplate();
             var template = _.template(modelTemplate);
             var templateData = template({
@@ -66,13 +76,52 @@ org.ekstep.questionunit.questionComponent = {
         ';
     },
     isQuestionTextOverflow: function () {
-        if ($('.hiding-container').height() > $('.expand-container').height()) {
-            $('.expand-button').css('display', 'none');
-            $('.hiding-container').addClass('absolute-center');
-            $('.hiding-container').css('height', '100%');
-        } else {
-            $('.expand-button').css('display', 'block');
+        // This method's definition is based on this article,
+        // https://blog.lavrton.com/javascript-loops-how-to-handle-async-await-6252dd3c795
+
+        // creating an array to iterate over.
+        var arr = _.range(10);
+
+        // This method checks if the dom element has proper height,
+        // if yes then it applies appropriate css.
+        // It returns a promise.
+        function check(iteration) {
+            return new Promise(function (resolve) {
+                if ($('.expand-container').height() === 0) {
+                    resolve(false)
+                } else {
+                    // CSS to be applied
+                    if ($('.hiding-container').height() > $('.expand-container').height()) {
+                        $('.expand-button').css('display', 'none');
+                        $('.hiding-container').addClass('absolute-center');
+                        $('.hiding-container').css('height', '100%');
+                    } else {
+                        $('.expand-button').css('display', 'block');
+                    }
+                    resolve(true);
+                }
+            })
         }
+
+        // This is an async method which calls the check() method (max defined by arr array)
+        async function process() {
+            for (const i of arr) {
+                try {
+                    var res = await check(i);
+                    if (res) {
+                        console.log('iteration -> ' + (i + 1) + ' -> RESOLVED!!!');
+                        break;
+                    } else {
+                        throw new Error('iteration -> ' + (i + 1) + ' -> NOT resolved')
+                    }
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+        }
+
+        // start process
+        process();
     },
     toggleQuestionText: function () {
         if ($('.hiding-container').hasClass('expanded')) {
@@ -97,7 +146,7 @@ org.ekstep.questionunit.questionComponent = {
         this.isQuestionTextOverflow();
         org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg'), 'renderer/assets/down_arrow.png', 'org.ekstep.questionunit', '1.0');
         org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg'), 'renderer/assets/audio-icon.png', 'org.ekstep.questionunit', '1.0');
-        org.ekstep.questionunit.questionComponent.loadAssetUrl($('#org-ekstep-questionunit-questionComponent-qimage'),$('#org-ekstep-questionunit-questionComponent-qimage').data('image'), 'org.ekstep.questionunit', '1.0');
+        org.ekstep.questionunit.questionComponent.loadAssetUrl($('#org-ekstep-questionunit-questionComponent-qimage'), $('#org-ekstep-questionunit-questionComponent-qimage').data('image'), 'org.ekstep.questionunit', '1.0');
     }
 }
 jQuery.extend(org.ekstep.questionunit.questionComponent, org.ekstep.questionunit.baseComponent);
