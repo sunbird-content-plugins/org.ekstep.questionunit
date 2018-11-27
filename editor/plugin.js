@@ -58,27 +58,24 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
     });
   },
 
-  setMedia: function(media, oldMedia){
+  setAllMedia: function(mediaArray){
     var instance = this;
-    var mediaObject = {};
-    if(media.type == 'default') {
-      mediaObject = media.value;
-    }
-    else if(media.type == 'q' || media.type == 'op' || media.type == 'LHS' || media.type == 'RHS'){
-      var mediaObj = {
-        "id": Math.floor(Math.random() * 1000000000), // Unique identifier
-        "src": org.ekstep.contenteditor.mediaManager.getMediaOriginURL(media.value.assetMedia.src), // Media URL
-        "assetId": media.value.assetMedia.id, // Asset identifier
-        "type": media.value.assetMedia.type, // Type of asset (image, audio, etc)
-        "preload": false // true or false
-      };
-      mediaObject = mediaObj; 
-    }
-    else{
-      mediaObject = media;
-    }
-    this._media = mediaObject;
-    instance.setAllMedia(mediaObject, oldMedia);
+    _.each(mediaArray, function (obj) {
+      instance.addToAllMedia(obj, undefined)
+    });
+  },
+
+  setMedia: function(media, oldMedia, callback){
+    var instance = this;
+    var mediaObj = {
+      "id": Math.floor(Math.random() * 1000000000), // Unique identifier
+      "src": org.ekstep.contenteditor.mediaManager.getMediaOriginURL(media.value.assetMedia.src), // Media URL
+      "assetId": media.value.assetMedia.id, // Asset identifier
+      "type": media.value.assetMedia.type, // Type of asset (image, audio, etc)
+      "preload": false // true or false
+    };
+    instance.addToAllMedia(mediaObj, oldMedia);
+    callback(mediaObj.src);
   },
 
   getMedia: function(key, value){
@@ -87,7 +84,7 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
     return media;
   },
 
-  setAllMedia: function(media, oldMedia){
+  addToAllMedia: function(media, oldMedia){
     var instance = this;
     if(_.isUndefined(oldMedia)){
       this._allMedia.push(media);
