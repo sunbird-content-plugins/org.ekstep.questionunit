@@ -70,58 +70,21 @@ org.ekstep.questionunit.questionComponent = {
                 </div>\
             </div>\
             <div class="expand-button" onclick="org.ekstep.questionunit.questionComponent.toggleQuestionText()">\
-                <img src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg"/>\
+                <img class="exp-button" src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg"/>\
             </div>\
         </div><script>org.ekstep.questionunit.questionComponent.onDomReady();</script>\
         ';
     },
     isQuestionTextOverflow: function () {
-        // This method's definition is based on this article,
-        // https://blog.lavrton.com/javascript-loops-how-to-handle-async-await-6252dd3c795
-
-        // creating an array to iterate over.
-        var arr = _.range(10);
-
-        // This method checks if the dom element has proper height,
-        // if yes then it applies appropriate css.
-        // It returns a promise.
-        function check(iteration) {
-            return new Promise(function (resolve) {
-                if ($('.expand-container').height() === 0) {
-                    resolve(false)
-                } else {
-                    // CSS to be applied
-                    if ($('.hiding-container').height() > $('.expand-container').height()) {
-                        $('.expand-button').css('display', 'none');
-                        $('.hiding-container').addClass('absolute-center');
-                        $('.hiding-container').css('height', '100%');
-                    } else {
-                        $('.expand-button').css('display', 'block');
-                    }
-                    resolve(true);
-                }
-            })
-        }
-
-        // This is an async method which calls the check() method (max defined by arr array)
-        async function process() {
-            for (const i of arr) {
-                try {
-                    var res = await check(i);
-                    if (res) {
-                        console.log('iteration -> ' + (i + 1) + ' -> RESOLVED!!!');
-                        break;
-                    } else {
-                        throw new Error('iteration -> ' + (i + 1) + ' -> NOT resolved')
-                    }
-                } catch (err) {
-                    console.log(err)
-                }
+        $('.exp-button').on("load", function () {
+            if ($('.hiding-container').height() > $('.expand-container').height()) {
+                $('.expand-button').css('display', 'none');
+                $('.hiding-container').addClass('absolute-center');
+                $('.hiding-container').css('height', '100%');
+            } else {
+                $('.expand-button').css('display', 'block');
             }
-        }
-
-        // start process
-        process();
+        })
     },
     toggleQuestionText: function () {
         if ($('.hiding-container').hasClass('expanded')) {
@@ -167,3 +130,4 @@ org.ekstep.questionunit.backgroundComponent = {
 };
 
 //# sourceURL=org.ekstep.questionunit.components.js
+//https://staging.open-sunbird.org/workspace/content/edit/content/do_2126328762311393281974/allcontent/NCF#no
