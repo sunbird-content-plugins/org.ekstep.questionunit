@@ -3,6 +3,13 @@ body {
     line-height: 19px;
 }
 
+/* overiding katex css */
+.math-text .katex-display {
+    margin: 0.2em 0 !important;
+}
+
+/*end */
+
 /* From here image model popup style */
 
 .qc-popup-close-button {
@@ -65,7 +72,8 @@ body {
     align-items: center;
 }
 
-.question-container .image-container img.audio, .question-container .image-container img.q-image {
+.question-container .image-container img.audio,
+.question-container .image-container img.q-image {
     position: absolute;
     top: 0;
     bottom: 0;
