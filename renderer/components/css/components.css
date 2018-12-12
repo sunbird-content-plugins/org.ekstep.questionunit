@@ -5,7 +5,7 @@ body {
 
 /* overiding katex css */
 .math-text .katex-display {
-    margin: 0.2em 0 !important;
+    margin: 0.5em 0 !important;
 }
 
 /*end */
@@ -123,7 +123,7 @@ body {
 
 .question-container .hiding-container {
     width: 100%;
-    height: 87%;
+    height: 90%;
     padding: 0% 14.0625%;
     overflow: hidden;
     background: white;
