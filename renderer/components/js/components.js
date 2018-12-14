@@ -4,10 +4,20 @@ org.ekstep.questionunit.baseComponent = {
         EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:playaudio', audioObj)
     },
     loadImageFromUrl: function (element, imgUrl, pluginId, pluginVer) {
-        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadimagefromurl', { 'element': element, 'path': imgUrl, 'pluginId': pluginId, 'pluginVer': pluginVer });
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadimagefromurl', {
+            'element': element,
+            'path': imgUrl,
+            'pluginId': pluginId,
+            'pluginVer': pluginVer
+        });
     },
-    loadAssetUrl: function(element, imgUrl, pluginId, pluginVer){
-        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadAssetUrl', { 'element': element, 'path': imgUrl, 'pluginId': pluginId, 'pluginVer': pluginVer });
+    loadAssetUrl: function (element, imgUrl, pluginId, pluginVer) {
+        EkstepRendererAPI.dispatchEvent('org.ekstep.questionunit:loadAssetUrl', {
+            'element': element,
+            'path': imgUrl,
+            'pluginId': pluginId,
+            'pluginVer': pluginVer
+        });
     },
     generateModelTemplate: function () {
         return "<div class='popup' id='image-model-popup' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'><div class='popup-overlay' onclick='org.ekstep.questionunit.questionComponent.hideImageModel()'></div> \
@@ -19,11 +29,11 @@ org.ekstep.questionunit.baseComponent = {
         </div>"
     },
     showImageModel: function (event, imageSrc, elementId) {
-        if(elementId){
-            imageSrc = $("#"+elementId).attr('src');
+        if (elementId) {
+            imageSrc = $("#" + elementId).attr('src');
         }
 
-        if(imageSrc){
+        if (imageSrc) {
             var modelTemplate = this.generateModelTemplate();
             var template = _.template(modelTemplate);
             var templateData = template({
@@ -60,19 +70,21 @@ org.ekstep.questionunit.questionComponent = {
                 </div>\
             </div>\
             <div class="expand-button" onclick="org.ekstep.questionunit.questionComponent.toggleQuestionText()">\
-                <img src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg"/>\
+                <img class="exp-button" src="" id="org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg"/>\
             </div>\
         </div><script>org.ekstep.questionunit.questionComponent.onDomReady();</script>\
         ';
     },
     isQuestionTextOverflow: function () {
-        if ($('.hiding-container').height() > $('.expand-container').height()) {
-            $('.expand-button').css('display', 'none');
-            $('.hiding-container').addClass('absolute-center');
-            $('.hiding-container').css('height', '100%');
-        } else {
-            $('.expand-button').css('display', 'block');
-        }
+        $('.exp-button').on("load", function () {
+            if ($('.hiding-container').height() > $('.expand-container').height()) {
+                $('.expand-button').css('display', 'none');
+                $('.hiding-container').addClass('absolute-center');
+                $('.hiding-container').css('height', '100%');
+            } else {
+                $('.expand-button').css('display', 'block');
+            }
+        })
     },
     toggleQuestionText: function () {
         if ($('.hiding-container').hasClass('expanded')) {
@@ -97,7 +109,7 @@ org.ekstep.questionunit.questionComponent = {
         this.isQuestionTextOverflow();
         org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-downArwImg'), 'renderer/assets/down_arrow.png', 'org.ekstep.questionunit', '1.0');
         org.ekstep.questionunit.questionComponent.loadImageFromUrl($('#org-ekstep-contentrenderer-questionunit-questionComponent-AudioImg'), 'renderer/assets/audio-icon.png', 'org.ekstep.questionunit', '1.0');
-        org.ekstep.questionunit.questionComponent.loadAssetUrl($('#org-ekstep-questionunit-questionComponent-qimage'),$('#org-ekstep-questionunit-questionComponent-qimage').data('image'), 'org.ekstep.questionunit', '1.0');
+        org.ekstep.questionunit.questionComponent.loadAssetUrl($('#org-ekstep-questionunit-questionComponent-qimage'), $('#org-ekstep-questionunit-questionComponent-qimage').data('image'), 'org.ekstep.questionunit', '1.0');
     }
 }
 jQuery.extend(org.ekstep.questionunit.questionComponent, org.ekstep.questionunit.baseComponent);
