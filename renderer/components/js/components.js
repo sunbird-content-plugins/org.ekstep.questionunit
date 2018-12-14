@@ -130,4 +130,3 @@ org.ekstep.questionunit.backgroundComponent = {
 };
 
 //# sourceURL=org.ekstep.questionunit.components.js
-//https://staging.open-sunbird.org/workspace/content/edit/content/do_2126328762311393281974/allcontent/NCF#no
