@@ -20,7 +20,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     EkstepRendererAPI.addEventListener(this._manifest.id + ":evaluate", this.evaluateQuestion, this);
     EkstepRendererAPI.addEventListener(this._manifest.id + ":rendermath", this.renderMath, this);
     //Currently this plugin is regiesters twice upon rendering, Yet to find what's the issue, registering two event listerns with same function creating problems <Sivashanmugam kannan>
-    if(!EventBus.listeners["org.ekstep.questionunit:playaudio"]){
+    if (!EventBus.listeners["org.ekstep.questionunit:playaudio"]) {
       EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":playaudio", this.handlePlayAudio, this);
     }
     EkstepRendererAPI.addEventListener('org.ekstep.questionunit' + ":loadimagefromurl", this.handleLoadImageFromUrl, this);
@@ -35,7 +35,9 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
 
     var template = _.template(this._question.template);
     var questionsetInstance = event.target;
-    $(questionsetInstance._constants.qsElement).html(template({ question: this._question }));
+    $(questionsetInstance._constants.qsElement).html(template({
+      question: this._question
+    }));
 
     this.postQuestionShow(event);
 
@@ -155,10 +157,9 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * @returns {String} url.
    */
   getAssetUrl: function (url) {
-    if (isbrowserpreview) {// eslint-disable-line no-undef
+    if (isbrowserpreview) { // eslint-disable-line no-undef
       return url;
-    }
-    else {
+    } else {
       return 'file:///' + EkstepRendererAPI.getBaseURL() + url;
     }
   },
@@ -213,7 +214,7 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
     var src = this.getIcon(eventData.target.path, eventData.target.pluginId, eventData.target.pluginVer);
     eventData.target.element.attr('src', src);
   },
-  handleGetAssetUrl: function(eventData){
+  handleGetAssetUrl: function (eventData) {
     var src = this.getAssetUrl(eventData.target.path, eventData.target.pluginId, eventData.target.pluginVer);
     eventData.target.element.attr('src', src);
   },
@@ -224,10 +225,9 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * getIcon('renderer/assets/icon.png')
    */
   getIcon: function (path, pluginId, pluginVer) {
-    if (isbrowserpreview) {// eslint-disable-line no-undef
+    if (isbrowserpreview) { // eslint-disable-line no-undef
       return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(pluginId, pluginVer, path));
-    }
-    else {
+    } else {
       return 'file:///' + EkstepRendererAPI.getBaseURL() + 'content-plugins/' + pluginId + '-' + pluginVer + '/' + path;
     }
   },
@@ -236,20 +236,19 @@ org.ekstep.contentrenderer.questionUnitPlugin = Plugin.extend({
    * getAudioIcon('renderer/assets/icon.png')
    */
   getAudioIcon: function (path) {
-    if (isbrowserpreview) {// eslint-disable-line no-undef
+    if (isbrowserpreview) { // eslint-disable-line no-undef
       return this.getAssetUrl(org.ekstep.pluginframework.pluginManager.resolvePluginResource(this._manifest.id, this._manifest.ver, path));
-    }
-    else {
-      return 'file:///' + EkstepRendererAPI.getBaseURL() + 'content-plugins/' + this._manifest.id + '-' +this._manifest.ver + '/' + path;
+    } else {
+      return 'file:///' + EkstepRendererAPI.getBaseURL() + 'content-plugins/' + this._manifest.id + '-' + this._manifest.ver + '/' + path;
     }
   },
   renderMath: function (event) {
-    setTimeout(function () {
-      jQuery('.math-text').each(function (index, element) {
-        var mathText = element.getAttribute('data-math');
-        katex.render(mathText, jQuery(element)[0], { displayMode: true });
+    jQuery('.math-text').each(function (index, element) {
+      var mathText = element.getAttribute('data-math');
+      katex.render(mathText, jQuery(element)[0], {
+        displayMode: true
       });
-    }, 600);
+    });
   }
 });
 //# sourceURL=questionUnitRenderer.js
