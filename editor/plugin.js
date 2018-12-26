@@ -7,6 +7,7 @@
 org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugin.extend({
   type: "org.ekstep.contenteditor.questionUnitPlugin",
   _data: {},
+  _allMedia: [],
   /**
    * Initialize the plugin
    * Load CKEditor, call beforeInit and beforeInit
@@ -55,6 +56,55 @@ org.ekstep.contenteditor.questionUnitPlugin = org.ekstep.contenteditor.basePlugi
         callback(isValid,data);
       }
     });
+  },
+
+  setAllMedia: function(mediaArray){
+    var instance = this;
+    _.each(mediaArray, function (obj) {
+      instance.addToAllMedia(obj, undefined)
+    });
+  },
+
+  setMedia: function(media, oldMedia, callback){
+    var instance = this;
+    var mediaObj = {
+      "id": Math.floor(Math.random() * 1000000000), // Unique identifier
+      "src": org.ekstep.contenteditor.mediaManager.getMediaOriginURL(media.value.assetMedia.src), // Media URL
+      "assetId": media.value.assetMedia.id, // Asset identifier
+      "type": media.value.assetMedia.type, // Type of asset (image, audio, etc)
+      "preload": false // true or false
+    };
+    instance.addToAllMedia(mediaObj, oldMedia);
+    callback(mediaObj.src);
+  },
+
+  getMedia: function(key, value){
+    var media = {};
+    media = _.find(this._allMedia, function(mediaObj) { return mediaObj[key] == value; });
+    return media;
+  },
+
+  addToAllMedia: function(media, oldMedia){
+    var instance = this;
+    if(_.isUndefined(oldMedia)){
+      this._allMedia.push(media);
+    }
+    else {
+      var mediaToBeUpdated = _.find(this._allMedia, function(mediaObj) { return mediaObj.id == oldMedia.id; });
+      var updateMediaIndex = _.indexOf(this._allMedia, mediaToBeUpdated);
+      if (updateMediaIndex) this._allMedia.splice(updateMediaIndex, 1, media);
+    }
+    this._allMedia = _.unionBy(this._allMedia, 'assetId');
+  },
+
+  getAllMedia: function(){
+    return this._allMedia;
+  },
+
+  removeMedia: function(key, mediaValue){
+    var mediaToBeDeleted = _.find(this._allMedia, function(mediaObj) { return mediaObj[key] == mediaValue; });
+    var deleteMediaIndex = _.indexOf(this._allMedia, mediaToBeDeleted);
+    if (deleteMediaIndex) this._allMedia.splice(deleteMediaIndex, 1);
   }
 });
 //# sourceURL=questionUnitPlugin.js
